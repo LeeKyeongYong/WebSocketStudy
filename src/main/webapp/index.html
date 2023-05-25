@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>궁금하면 500원입니다.</title>
+	<style type="text/css">
+		body {
+			font-size: 12px;
+		}
+
+		#result {
+			width: 980px;
+			height: 400px;
+			word-wrap: break-word;
+			overflow: scroll;
+			border: 1px solid blue;
+		}
+
+		.me {
+			color: blue;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		const url = "ws://localhost:8080/WebSocketStudy/chat";
+		let webSocket;
+		let content$;
+		$(() => {
+			content$ = $("#result");
+			$("#btn_connect").on("click", () => {
+
+				if (window.WebSocket) {
+					webSocket = new WebSocket(url);
+				} else if (window.MozWebSocket) {
+					webSocket = new MozWebSocket(url);
+				} else {
+					display_message("브라우저가 웹 소켓을 지원하지 않습니다.");
+					return;
+				}
+
+				// 웹 소켓에 이벤트 핸들러를 설정
+				webSocket.onopen = (event) => {
+					display_message("연결되었습니다.");
+					$("#btn_close").prop("disabled", false);
+					$("#btn_connect").prop("disabled", true);
+				};
+
+				webSocket.onmessage = (event) => {
+					if (event.data.indexOf("나") != -1) {
+						display_message("<span class='me'>" + event.data + "</span>");
+					} else {
+						display_message(event.data);
+					}
+				};
+
+				webSocket.onclose = (event) => {
+					display_message("연결이 해제되었습니다.");
+					$("#btn_close").prop("disabled", true);
+					$("#btn_connect").prop("disabled", false);
+				};
+
+				webSocket.onerror = (event) => {
+					display_message("에러 : " + event.data);
+				};
+			});
+
+			$("#btn_send").on("click", () => {
+				const msg = $("#message").val();
+				if (msg.trim().length == 0) {
+					alert("메시지를 입력하세요.");
+					return;
+				}
+				webSocket.send(msg);
+				$("#message").val("");
+			});
+
+			$("#message").on("keypress", (event) => {
+				if (event.which == 13) {
+					$("#btn_send").trigger("click");
+				}
+			});
+
+			$("#btn_clear").on("click", () => {
+				content$.empty();
+			});
+
+			$("#btn_close").on("click", () => {
+				webSocket.close();
+			});
+
+		});
+
+		function display_message(message) {
+			content$.html(content$.html() + message + "<br />");
+		}
+	</script>
+
+</head>
+
+<body>
+	<h3>궁금하면 500원입니다.</h3>
+	<div id="result"></div>
+	<hr />
+	<button type="button" id="btn_connect">연결</button>
+	<button type="button" id="btn_close" disabled>연결 끊기</button>
+	<button type="button" id="btn_clear">채팅 창 지우기</button>
+	<hr />
+	<div>
+		<input type="text" size="100" id="message" />
+		<button type="button" id="btn_send">전송</button>
+	</div>
+</body>
+
+</html>
