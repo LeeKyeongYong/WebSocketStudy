@@ -23,13 +23,13 @@
        <td>서버 및 프레임워크</td>
         <td>
            <img src="https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black"/>
-           <img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white"/>
+           <img src="https://img.shields.io/badge/servlet-%236DB33F.svg?style=for-the-badge&logo=servlet&logoColor=white"/>
         </td>
     </tr>
     <tr>
         <td>개발도구</td>
         <td>
-            <img src="https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white"/>
+            <img src="https://img.shields.io/badge/Eclipse-000000.svg?style=for-the-badge&logo=Eclipse-idea&logoColor=white"/>
         </td>
     </tr>
     <tr>
