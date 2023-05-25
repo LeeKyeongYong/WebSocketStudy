@@ -29,11 +29,8 @@
 		$(() => {
 			content$ = $("#result");
 			$("#btn_connect").on("click", () => {
-
 				if (window.WebSocket) {
 					webSocket = new WebSocket(url);
-				} else if (window.MozWebSocket) {
-					webSocket = new MozWebSocket(url);
 				} else {
 					display_message("브라우저가 웹 소켓을 지원하지 않습니다.");
 					return;
