@@ -2,6 +2,22 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,intellij
 
 ### Eclipse ###
+#Gradle
+.gradle/
+build/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
 .metadata
 .classpath
 .project
@@ -15,6 +31,19 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+
+/.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+/.mvn/
+/mvnw
+/mvnw.bat
+mvnw.cmd
+HELP.md
+target/
+
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
 
 # External tool builders
 .externalToolBuilders/
@@ -74,8 +103,8 @@ local.properties
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 .DS_Store
-
-
+.idea/encodings.xml
+*.idea
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
